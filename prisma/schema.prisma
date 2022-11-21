@@ -1,0 +1,57 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Admin {
+  id          Int      @id @default(autoincrement())
+  email       String   @unique
+  password    String
+  firstName   String
+  lastName    String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  avatar      String?
+
+  roles AdminsOnRoles[]
+}
+
+model Role {
+  id          Int             @id @default(autoincrement())
+  tag         String          @unique
+  admins      AdminsOnRoles[]
+  name        String
+  description String?
+  permissions String[]
+}
+
+model AdminsOnRoles {
+  admin      Admin    @relation(fields: [adminId], references: [id])
+  adminId    Int
+  role       Role     @relation(fields: [roleId], references: [id])
+  roleId     Int
+  assignedAt DateTime @default(now())
+
+  @@id([adminId, roleId])
+}
+
+model RefreshToken {
+  id         Int      @id @default(autoincrement())
+  userId     Int      @unique
+  createdAt  DateTime @default(now())
+  expireDate DateTime
+}
+
+model User {
+  id        Int     @id @default(autoincrement())
+  phone     String  @unique
+  firstName String
+  lastName  String
+  avatar    String?
+  status    String
+}
