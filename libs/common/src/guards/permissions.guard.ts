@@ -9,7 +9,7 @@ import { Reflector } from '@nestjs/core'
 
 import { E_RolePermission } from '../models/shared/role'
 import { E_ServerMessageStatus } from '../models/shared/app'
-import { T_TokenData } from '../models/shared/token.model'
+import { T_TokenData } from '../models/shared/token'
 
 export const PermissionsGuard = (permissions: E_RolePermission[]) => {
   class PermissionsGuardMixin implements CanActivate {

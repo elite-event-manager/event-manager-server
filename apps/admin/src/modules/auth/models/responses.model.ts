@@ -2,7 +2,10 @@ import { Admin, AdminsOnRoles, Role } from '@prisma/client'
 
 import { I_Response } from '@app/common/models/shared/response'
 
-export type T_AdminPreview = Pick<Admin, 'firstName' | 'lastName' | 'email'> & {
+export type T_AdminPreview = Pick<
+  Admin,
+  'firstName' | 'lastName' | 'email' | 'avatar'
+> & {
   roles: (AdminsOnRoles & {
     role: Role
   })[]

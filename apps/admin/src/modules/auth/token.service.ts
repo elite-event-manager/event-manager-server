@@ -5,7 +5,7 @@ import { JwtService } from '@nestjs/jwt'
 import { T_RefreshResponse } from './models'
 
 import { PrismaService } from '@app/common/modules/prisma/prisma.service'
-import { T_TokenData } from '@app/common/models/shared/token.model'
+import { T_TokenData } from '@app/common/models/shared/token'
 
 @Injectable()
 export class TokenService {

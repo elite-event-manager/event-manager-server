@@ -18,7 +18,19 @@ export class AdminsService {
   constructor(private prisma: PrismaService) {}
 
   async getAll(): Promise<T_GetAdminsResponse> {
-    const admins = await this.prisma.admin.findMany()
+    const admins = await this.prisma.admin.findMany({
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        description: true,
+        avatar: true,
+        createdAt: true,
+        updatedAt: true,
+        roles: { include: { role: true } },
+      },
+    })
 
     return { data: admins }
   }
@@ -26,6 +38,17 @@ export class AdminsService {
   async getOne(adminId: T_AdminId): Promise<T_GetAdminResponse> {
     const admin = await this.prisma.admin.findUnique({
       where: { id: adminId },
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        description: true,
+        avatar: true,
+        createdAt: true,
+        updatedAt: true,
+        roles: { include: { role: true } },
+      },
     })
 
     return { data: admin }

@@ -10,7 +10,6 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 
 import { DictionariesService } from './dictionaries.service'
 import {
-  I_DictionaryUserRolesResponse,
   I_DictionaryUserStatusesResponse,
 } from './models/response.model'
 

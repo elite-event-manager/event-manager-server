@@ -56,4 +56,8 @@ export class RolesService {
       })
     }
   }
+
+  async deleteOne(roleId: T_RoleId): Promise<void> {
+    await this.prisma.role.delete({ where: { id: roleId } })
+  }
 }

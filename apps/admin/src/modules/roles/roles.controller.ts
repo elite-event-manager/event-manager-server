@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -53,5 +54,11 @@ export class RolesController {
     @Body() dto: UpdateRoleDto,
   ): Promise<T_UpdateRoleResponse> {
     return await this.service.updateOne(dto, +id)
+  }
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.OK)
+  deleteOne(@Param('id') id: string) {
+    return this.service.deleteOne(+id)
   }
 }

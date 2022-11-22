@@ -59,7 +59,7 @@ export class AuthService {
           lastName: admin.lastName,
           email: admin.email,
           roles: admin.roles,
-          // avatar: admin.avatar,
+          avatar: admin.avatar,
         },
       },
     }
@@ -83,6 +83,7 @@ export class AuthService {
           lastName: admin.lastName,
           email: admin.email,
           roles: admin.roles,
+          avatar: admin.avatar,
         },
       },
     }
