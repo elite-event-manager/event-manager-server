@@ -9,7 +9,7 @@ export enum E_RolePermission {
 
   'admins.view.all' = 'admins.view.all',
   'admins.view.single' = 'admins.view.single',
-  'admins.update' = 'admins.update',
+  'admins.update.general' = 'admins.update.general',
   'admins.update.password' = 'admins.update.password',
   'admins.update.roles' = 'admins.update.roles',
   'admins.create' = 'admins.create',

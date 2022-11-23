@@ -1,7 +1,12 @@
 import { ForbiddenException, Injectable } from '@nestjs/common'
 import * as argon2 from 'argon2'
 
-import { ChangePasswordDto, CreateAdminDto, UpdateAdminDto } from './dtos'
+import {
+  ChangePasswordDto,
+  ChangeRolesDto,
+  CreateAdminDto,
+  UpdateAdminDto,
+} from './dtos'
 import {
   T_CreateAdminResponse,
   T_GetAdminsResponse,
@@ -117,6 +122,20 @@ export class AdminsService {
     await this.prisma.admin.update({
       where: { id: adminId },
       data: { password },
+    })
+  }
+
+  async changeRoles(dto: ChangeRolesDto, adminId: T_AdminId) {
+    await this.prisma.admin.update({
+      where: { id: adminId },
+      data: {
+        roles: {
+          deleteMany: {},
+          create: dto.rolesIds.map((roleId) => ({
+            role: { connect: { id: roleId } },
+          })),
+        },
+      },
     })
   }
 }

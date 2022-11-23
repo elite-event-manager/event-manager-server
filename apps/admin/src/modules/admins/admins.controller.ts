@@ -14,7 +14,12 @@ import {
 import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger'
 import { AuthGuard } from '@nestjs/passport'
 
-import { CreateAdminDto, UpdateAdminDto, ChangePasswordDto } from './dtos'
+import {
+  CreateAdminDto,
+  UpdateAdminDto,
+  ChangePasswordDto,
+  ChangeRolesDto,
+} from './dtos'
 import {
   T_CreateAdminResponse,
   T_GetAdminsResponse,
@@ -71,5 +76,11 @@ export class AdminsController {
   @HttpCode(HttpStatus.OK)
   changePassword(@Param('id') id: string, @Body() dto: ChangePasswordDto) {
     return this.service.changePassword(dto, +id)
+  }
+
+  @Patch('changeRoles/:id')
+  @HttpCode(HttpStatus.OK)
+  changeRoles(@Param('id') id: string, @Body() dto: ChangeRolesDto) {
+    return this.service.changeRoles(dto, +id)
   }
 }
