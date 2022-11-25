@@ -37,6 +37,7 @@ export class UsersService {
       })
       return { data: user }
     } catch (error) {
+      console.log('error', error)
       throw new ForbiddenException({
         message: { text: error, status: E_ServerMessageStatus.error },
       })

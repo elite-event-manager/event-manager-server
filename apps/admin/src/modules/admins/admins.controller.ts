@@ -11,7 +11,7 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common'
-import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger'
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { AuthGuard } from '@nestjs/passport'
 
 import {

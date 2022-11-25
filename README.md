@@ -1,5 +1,3 @@
-yarn prisma
-
 # Миграция
 
 yarn prisma migrate dev --name "name"

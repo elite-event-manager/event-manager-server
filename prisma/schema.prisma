@@ -48,10 +48,15 @@ model RefreshToken {
 }
 
 model User {
-  id        Int     @id @default(autoincrement())
-  phone     String  @unique
-  firstName String
-  lastName  String
-  avatar    String?
-  status    String
+  id          Int     @id @default(autoincrement())
+  phone       String  @unique
+  firstName   String
+  lastName    String
+  middleName  String
+  age         Int
+  job         String
+  address     String
+  description String
+  avatar      String?
+  status      String
 }

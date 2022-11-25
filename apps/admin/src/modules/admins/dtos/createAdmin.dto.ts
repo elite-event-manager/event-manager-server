@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsString, IsArray, IsNumber } from 'class-validator'
+import { IsString } from 'class-validator'
 
 export class CreateAdminDto {
   @ApiProperty({ default: 'test@mail.com' })
@@ -22,10 +22,6 @@ export class CreateAdminDto {
   description: string
 
   @ApiProperty()
-  @IsArray()
-  roleIds: number[]
-
-  @ApiProperty()
-  @IsNumber()
-  avatarId: number
+  @IsString()
+  avatar: string
 }

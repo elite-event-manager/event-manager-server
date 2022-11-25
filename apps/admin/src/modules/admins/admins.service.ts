@@ -60,7 +60,10 @@ export class AdminsService {
   }
 
   async createOne(dto: CreateAdminDto): Promise<T_CreateAdminResponse> {
-    const { password, roleIds, ...rest } = dto
+    const { password, ...rest } = dto
+    const role = await this.prisma.role.findUnique({
+      where: { tag: 'Manager' },
+    })
     try {
       const hashedPassword = await argon2.hash(password)
       const user = await this.prisma.admin.create({
@@ -68,13 +71,7 @@ export class AdminsService {
           ...rest,
           password: hashedPassword,
           roles: {
-            create: roleIds.map((roleId) => ({
-              role: {
-                connect: {
-                  id: roleId,
-                },
-              },
-            })),
+            create: { roleId: role.id },
           },
         },
       })

@@ -20,6 +20,26 @@ export class UpdateUserDto {
   @IsString()
   lastName: string
 
+  @ApiProperty()
+  @IsString()
+  middleName: string
+
+  @ApiProperty()
+  @IsString()
+  description: string
+
+  @ApiProperty()
+  @IsString()
+  address: string
+
+  @ApiProperty()
+  @IsString()
+  job: string
+
+  @ApiProperty()
+  @IsNumber()
+  age: number
+
   @ApiProperty({
     default: E_UserStatus.resident,
   })

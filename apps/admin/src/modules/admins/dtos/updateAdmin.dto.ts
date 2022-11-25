@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsString, IsNumber } from 'class-validator'
+import { IsString } from 'class-validator'
 
 export class UpdateAdminDto {
   @ApiProperty({ default: 'test@mail.com' })
@@ -18,6 +18,6 @@ export class UpdateAdminDto {
   description: string
 
   @ApiProperty()
-  @IsNumber()
-  avatarId: number
+  @IsString()
+  avatar: string
 }
