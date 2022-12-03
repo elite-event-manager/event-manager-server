@@ -11,7 +11,7 @@ export class TokenService {
   async generateTokens(data: T_TokenData): Promise<{ accessToken: string }> {
     const at = await this.jwtService.signAsync(data, {
       secret: this.config.get('JWT_SECRET_MOBILE_AT'),
-      expiresIn: 5 * 60,
+      expiresIn: 7 * 24 * 60 * 60,
     })
 
     return {

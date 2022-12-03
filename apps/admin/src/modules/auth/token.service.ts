@@ -5,7 +5,7 @@ import { JwtService } from '@nestjs/jwt'
 import { T_RefreshResponse } from './models'
 
 import { PrismaService } from '@app/common/modules/prisma/prisma.service'
-import { T_TokenData } from '@app/common/models/shared/token'
+import { T_TokenData } from 'apps/admin/src/modules/auth/models/token.model'
 
 @Injectable()
 export class TokenService {
@@ -47,7 +47,7 @@ export class TokenService {
 
     const at = await this.jwtService.signAsync(data, {
       secret: this.config.get('JWT_SECRET_ADMIN_AT'),
-      expiresIn: 60 * 60,
+      expiresIn: 5 * 60,
     })
 
     const rt = await this.jwtService.signAsync(

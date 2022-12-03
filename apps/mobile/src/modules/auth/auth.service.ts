@@ -1,29 +1,17 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common'
 import * as argon2 from 'argon2'
-import { Repository } from 'typeorm'
 
 import { SignInDto } from './dtos/signIn.dto'
 import { TokenService } from './token.service'
 import { T_AuthResponse } from './models'
 
 import { E_ServerMessageStatus } from '@app/common/models/shared/app'
-import { InjectRepository } from '@nestjs/typeorm'
-import { User } from '@app/common/entities/user.entity'
 
 @Injectable()
 export class AuthService {
-  constructor(
-    @InjectRepository(User)
-    private repository: Repository<User>,
-    private tokenService: TokenService,
-  ) {}
+  constructor(private tokenService: TokenService) {}
 
   async signIn(dto: SignInDto): Promise<T_AuthResponse> {
-    const user = await this.repository.findOne({
-      where: { phone: dto.phone },
-      relations: { avatar: true },
-    })
-
     // Если пользователь не найден
     if (!user)
       throw new UnauthorizedException({

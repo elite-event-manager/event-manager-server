@@ -17,17 +17,17 @@ export class UsersService {
   constructor(private prisma: PrismaService) {}
 
   async getAll(): Promise<T_GetUsersResponse> {
-    const admins = await this.prisma.user.findMany()
+    const users = await this.prisma.user.findMany()
 
-    return { data: admins }
+    return { data: users }
   }
 
   async getOne(userId: T_UserId): Promise<T_GetUserResponse> {
-    const admin = await this.prisma.user.findUnique({
+    const user = await this.prisma.user.findUnique({
       where: { id: userId },
     })
 
-    return { data: admin }
+    return { data: user }
   }
 
   async create(dto: CreateUserDto): Promise<T_CreateUserResponse> {

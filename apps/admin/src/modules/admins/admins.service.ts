@@ -17,6 +17,7 @@ import {
 import { T_AdminId } from '@app/common/models/shared/admin'
 import { E_ServerMessageStatus } from '@app/common/models/shared/app'
 import { PrismaService } from '@app/common/modules/prisma/prisma.service'
+import { E_RolePermission } from '@app/common/models/shared/role'
 
 @Injectable()
 export class AdminsService {
@@ -61,18 +62,12 @@ export class AdminsService {
 
   async createOne(dto: CreateAdminDto): Promise<T_CreateAdminResponse> {
     const { password, ...rest } = dto
-    const role = await this.prisma.role.findUnique({
-      where: { tag: 'Manager' },
-    })
     try {
       const hashedPassword = await argon2.hash(password)
       const user = await this.prisma.admin.create({
         data: {
           ...rest,
           password: hashedPassword,
-          roles: {
-            create: { roleId: role.id },
-          },
         },
       })
       return { data: user }
@@ -134,5 +129,24 @@ export class AdminsService {
         },
       },
     })
+  }
+
+  async checkPermissions(
+    adminId: T_AdminId,
+    scope: E_RolePermission[],
+  ): Promise<boolean> {
+    const admin = await this.prisma.admin.findUnique({
+      where: { id: adminId },
+      include: { roles: { include: { role: true } } },
+    })
+
+    return admin.roles.reduce((previousValue, currentValue) => {
+      if (!previousValue) {
+        previousValue = currentValue.role.permissions.some(
+          (permission: E_RolePermission) => scope.includes(permission),
+        )
+      }
+      return previousValue
+    }, false)
   }
 }

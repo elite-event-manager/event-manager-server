@@ -19,7 +19,7 @@ import { GetCurrentTokenData } from './decorators/getCurrentTokenData.decorator'
 import { GetUserId } from '@app/common/decorators/getUserId.decorator'
 import JwtRefreshGuard from '@app/common/guards/jwtRefresh.guard'
 import { T_AdminId } from '@app/common/models/shared/admin'
-import { T_TokenData } from '@app/common/models/shared/token'
+import { T_TokenData } from 'apps/admin/src/modules/auth/models/token.model'
 
 @ApiTags('Auth')
 @Controller('auth')

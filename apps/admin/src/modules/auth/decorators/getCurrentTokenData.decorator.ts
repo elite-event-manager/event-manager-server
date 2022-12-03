@@ -1,5 +1,5 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common'
-import { T_TokenData } from '@app/common/models/shared/token'
+import { T_TokenData } from 'apps/admin/src/modules/auth/models/token.model'
 
 export const GetCurrentTokenData = createParamDecorator(
   (_, context: ExecutionContext): T_TokenData => {

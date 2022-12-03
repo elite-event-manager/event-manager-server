@@ -38,25 +38,28 @@ import { PermissionsGuard } from '@app/common/guards/permissions.guard'
 export class AdminsController {
   constructor(private readonly service: AdminsService) {}
 
-  @UseGuards(PermissionsGuard([E_RolePermission['admins.view.all']]))
+  @UseGuards(PermissionsGuard([E_RolePermission['admins.view']]))
   @Get()
   @HttpCode(HttpStatus.OK)
   getAll(): Promise<T_GetAdminsResponse> {
     return this.service.getAll()
   }
 
+  @UseGuards(PermissionsGuard([E_RolePermission['admins.view']]))
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   getOne(@Param('id') id: string): Promise<T_GetAdminResponse> {
     return this.service.getOne(+id)
   }
 
+  @UseGuards(PermissionsGuard([E_RolePermission['admins.create']]))
   @Post()
   @HttpCode(HttpStatus.CREATED)
   createOne(@Body() dto: CreateAdminDto): Promise<T_CreateAdminResponse> {
     return this.service.createOne(dto)
   }
 
+  @UseGuards(PermissionsGuard([E_RolePermission['admins.update.general']]))
   @Put(':id')
   @HttpCode(HttpStatus.OK)
   async updateOne(
@@ -66,18 +69,21 @@ export class AdminsController {
     return await this.service.updateOne(dto, +id)
   }
 
+  @UseGuards(PermissionsGuard([E_RolePermission['admins.delete']]))
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
   deleteOne(@Param('id') id: string) {
     return this.service.deleteOne(+id)
   }
 
+  @UseGuards(PermissionsGuard([E_RolePermission['admins.update.password']]))
   @Patch('changePassword/:id')
   @HttpCode(HttpStatus.OK)
   changePassword(@Param('id') id: string, @Body() dto: ChangePasswordDto) {
     return this.service.changePassword(dto, +id)
   }
 
+  @UseGuards(PermissionsGuard([E_RolePermission['admins.update.roles']]))
   @Patch('changeRoles/:id')
   @HttpCode(HttpStatus.OK)
   changeRoles(@Param('id') id: string, @Body() dto: ChangeRolesDto) {

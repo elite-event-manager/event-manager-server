@@ -15,8 +15,7 @@ export const roleSeed = async (): Promise<{
     P['users.create'],
     P['users.delete'],
     P['users.update'],
-    P['users.view.all'],
-    P['users.view.single'],
+    P['users.view'],
   ]
 
   const adminPermissions = [
@@ -26,8 +25,7 @@ export const roleSeed = async (): Promise<{
     P['admins.update.general'],
     P['admins.update.roles'],
     P['admins.update.password'],
-    P['admins.view.all'],
-    P['admins.view.single'],
+    P['admins.view'],
   ]
 
   const superAdmin = await prisma.role.upsert({
